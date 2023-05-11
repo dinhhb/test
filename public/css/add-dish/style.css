@@ -19,7 +19,7 @@ body {
     /* background-image: -moz-linear-gradient( 136deg, rgb(116,235,213) 0%, rgb(63,43,150) 100%);
     background-image: -webkit-linear-gradient( 136deg, rgb(116,235,213) 0%, rgb(63,43,150) 100%);
     background-image: -ms-linear-gradient( 136deg, rgb(116,235,213) 0%, rgb(63,43,150) 100%); */
-    background-image: url('../images/add.jpg');
+    background-image: url('/images/add.jpg');
 }
 .form-v1-content   {
 	background: #fff;

@@ -8,6 +8,8 @@ const router = express.Router();
 
 router.get('/dish-management', adminController.getDishManagement);
 
-// router.get('/dish-detail', mainPageController.getDishDetail);
+router.get('/dish-verification', adminController.getDishVerification);
+
+router.get('/account-management', adminController.getAccountManagement);
 
 module.exports = router;

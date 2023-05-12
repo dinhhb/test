@@ -18,10 +18,3 @@ exports.getSharedDish = (req, res, next) => {
         path: '/shared-dish'
     })  
 };
-
-exports.getAddDish = (req, res, next) => {
-    res.render('user/add-dish', {
-        // pageTitle: 'Shop',
-        path: '/add-dish'
-    })  
-};

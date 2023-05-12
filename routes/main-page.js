@@ -2,12 +2,12 @@ const path = require('path');
 
 const express = require('express');
 
-const mainPageController = require('../controllers/main-page');
+const dishController = require('../controllers/dish');
 
 const router = express.Router();
 
-router.get('/', mainPageController.getMainPage);
+router.get('/', dishController.getDishes);
 
-router.get('/dish-detail', mainPageController.getDishDetail);
+router.get('/dish-detail', dishController.getDishDetail);
 
 module.exports = router;

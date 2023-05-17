@@ -8,8 +8,14 @@ exports.getAddDish = (req, res, next) => {
 };
 
 exports.postAddDish = (req, res, next) => {
-    const dish = new Dish(req.body.name);
-    dish.save();
+    const dishData = {
+        name: req.body.name,
+        image: req.body.image,
+        ingredients: req.body.ingredient || [],
+        steps: req.body.step || [],
+        requirements: req.body.requirement
+      };
+      console.log(dishData);
     res.redirect('/');
 };
 

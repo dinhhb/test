@@ -14,6 +14,8 @@ router.get('/liked-dish', userController.getLikedDish);
 
 router.get('/shared-dish', userController.getSharedDish);
 
+router.get('/profile', userController.getProfile);
+
 router.get('/add-dish', dishController.getAddDish);
 
 router.post('/add-dish', dishController.postAddDish);

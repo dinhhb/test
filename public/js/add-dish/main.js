@@ -33,7 +33,7 @@ function readURL(input) {
 }
 
 $(document).ready(function() {
-    var i = 2;
+  var i = 2;
     $('#add-ingredient').html('<i class="fa-solid fa-plus"></i> Thêm');
     $('#add-ingredient').click(function() {
       var newFieldset = $('<fieldset>').append(
@@ -45,7 +45,30 @@ $(document).ready(function() {
       );
       $('#ingredients').append(newFieldset);
     });
+
+  var dishForm = document.getElementById('form-register');
+  // dishForm.addEventListener('submit', function(e) {
+  //   e.preventDefault(); // Ngăn chặn gửi yêu cầu POST mặc định
+
+  var finishButton = dishForm.querySelector(".actions a[href$='#finish']");
+  finishButton.addEventListener('click', function(e) {
+    e.preventDefault(); // Ngăn chặn gửi yêu cầu POST mặc định
+
+
+    var formData = new FormData(dishForm);
+    var ingredients = formData.getAll('ingredient[]');
+
+    // Gửi yêu cầu POST tới '/add-dish' với dữ liệu ingredients
+    $.ajax({
+      url: '/add-dish',
+      method: 'POST',
+      data: {
+        ingredient: ingredients
+      },
+     
+    });
   });
+});
 
   $(document).ready(function() {
     var i = 2;

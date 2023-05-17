@@ -824,6 +824,15 @@ function refreshPagination(wizard, options, state)
         var finish = wizard.find(".actions a[href$='#finish']").parent(),
             next = wizard.find(".actions a[href$='#next']").parent();
 
+            finish.find("a").on("click", function() {
+                // Thực hiện gửi yêu cầu POST tới '/add-dish' ở đây
+                var dishForm = document.getElementById('form-register');
+                dishForm.action = "/add-dish";
+                dishForm.method = "POST";
+                dishForm.submit();
+            });
+            
+            
         if (!options.forceMoveForward)
         {
             var previous = wizard.find(".actions a[href$='#previous']").parent();

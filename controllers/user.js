@@ -18,3 +18,10 @@ exports.getSharedDish = (req, res, next) => {
         path: '/shared-dish'
     })  
 };
+
+exports.getProfile = (req, res, next) => {
+    res.render('user/profile', {
+        // pageTitle: 'Shop',
+        path: '/profile'
+    })  
+};

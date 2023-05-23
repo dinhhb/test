@@ -44,6 +44,11 @@ $(document).ready(function() {
         })
       );
       $('#ingredients').append(newFieldset);
+
+      // Lưu giá trị của trường fieldset vào phần tử tiếp theo trong mảng ingredient[]
+    var inputValue = $('input[name="ingredient[]"]').eq(ingredientIndex).val();
+    $('input[name="ingredient[]"]').eq(ingredientIndex + 1).val(inputValue);
+    ingredientIndex++;
     });
 
   var dishForm = document.getElementById('form-register');

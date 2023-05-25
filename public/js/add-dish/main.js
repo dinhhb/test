@@ -55,7 +55,7 @@ $(document).ready(function() {
   // dishForm.addEventListener('submit', function(e) {
   //   e.preventDefault(); // Ngăn chặn gửi yêu cầu POST mặc định
 
-  var finishButton = dishForm.querySelector(".actions a[href$='#finish']");
+  var finishButton = dishForm.querySelector(".actions a[href$='']");
   finishButton.addEventListener('click', function(e) {
     e.preventDefault(); // Ngăn chặn gửi yêu cầu POST mặc định
 

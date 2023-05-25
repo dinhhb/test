@@ -8,6 +8,7 @@ const dishController = require('../controllers/dish');
 
 const router = express.Router();
 
+// định nghĩa route xử lý
 router.get('/comment', userController.getComment);
 
 router.get('/liked-dish', userController.getLikedDish);

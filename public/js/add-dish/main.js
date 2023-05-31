@@ -1,93 +1,123 @@
-$(function(){
-    $("#form-total").steps({
-        headerTag: "h2",
-        bodyTag: "section",
-        transitionEffect: "fade",
-        enableAllSteps: true,
-        stepsOrientation: "vertical",
-        autoFocus: true,
-        transitionEffectSpeed: 500,
-        titleTemplate : '<div class="title">#title#</div>',
-        labels: {
-            previous : 'Back Step',
-            next : '<i class="zmdi zmdi-arrow-right"></i>',
-            finish : '<i class="zmdi zmdi-check"></i>',
-            current : ''
-        },
-    })
+$(function () {
+  $("#form-total").steps({
+    headerTag: "h2",
+    bodyTag: "section",
+    transitionEffect: "fade",
+    enableAllSteps: true,
+    stepsOrientation: "vertical",
+    autoFocus: true,
+    transitionEffectSpeed: 500,
+    titleTemplate: '<div class="title">#title#</div>',
+    labels: {
+      previous: "Back Step",
+      next: '<i class="zmdi zmdi-arrow-right"></i>',
+      finish: '<i class="zmdi zmdi-check"></i>',
+      current: "",
+    },
+  });
 });
 
 function readURL(input) {
-    if (input.files && input.files[0]) {
-        var reader = new FileReader();
+  if (input.files && input.files[0]) {
+    var reader = new FileReader();
 
-        reader.onload = function (e) {
-            $('#blah')
-                .attr('src', e.target.result)
-                .width(150)
-                .height(200);
-        };
+    reader.onload = function (e) {
+      $("#blah").attr("src", e.target.result).width(150).height(200);
+    };
 
-        reader.readAsDataURL(input.files[0]);
-    }
+    reader.readAsDataURL(input.files[0]);
+  }
 }
 
-$(document).ready(function() {
+$(document).ready(function () {
   var i = 2;
-    $('#add-ingredient').html('<i class="fa-solid fa-plus"></i> Thêm');
-    $('#add-ingredient').click(function() {
-      var newFieldset = $('<fieldset>').append(
-        $('<input>').attr({
-          type: 'text',
-          name: 'ingredient[]',
-          placeholder: 'Điền nguyên liệu thứ ' + i++ + ' của bạn'
-        })
-      );
-      $('#ingredients').append(newFieldset);
+  var ingredientIndex = 0;
+  var ingredientValues = [];
+  var dishForm = document.getElementById("form-register");
 
-      // Lưu giá trị của trường fieldset vào phần tử tiếp theo trong mảng ingredient[]
-    var inputValue = $('input[name="ingredient[]"]').eq(ingredientIndex).val();
-    $('input[name="ingredient[]"]').eq(ingredientIndex + 1).val(inputValue);
+  $("#add-ingredient").html('<i class="fa-solid fa-plus"></i> Thêm');
+  $("#add-ingredient").click(function () {
+    var newFieldset = $("<fieldset>").append(
+      $("<input>").attr({
+        type: "text",
+        name: "ingredient[]",
+        placeholder: "Điền nguyên liệu thứ " + i++ + " của bạn",
+      })
+    );
+    $("#ingredients").append(newFieldset);
+
+    // Lưu giá trị của trường fieldset vào phần tử tiếp theo trong mảng ingredient[]
+    var inputElements = $('input[name="ingredient[]"]');
+
+    var inputValue = inputElements.eq(ingredientIndex).val();
+    inputElements.eq(ingredientIndex + 1).val(inputValue);
     ingredientIndex++;
-    });
 
-  var dishForm = document.getElementById('form-register');
-  // dishForm.addEventListener('submit', function(e) {
-  //   e.preventDefault(); // Ngăn chặn gửi yêu cầu POST mặc định
+    ingredientValues.push(inputValue);
+  });
 
-  var finishButton = dishForm.querySelector(".actions a[href$='']");
-  finishButton.addEventListener('click', function(e) {
-    e.preventDefault(); // Ngăn chặn gửi yêu cầu POST mặc định
+  // console.log(ingredientValues);
 
+  var j = 2;
+  var stepIndex = 0;
+  var stepValues = [];
 
-    var formData = new FormData(dishForm);
-    var ingredients = formData.getAll('ingredient[]');
+  $("#add-step").html('<i class="fa-solid fa-plus"></i> Thêm');
+  $("#add-step").click(function () {
+    var newFieldset = $("<fieldset>").append(
+      $("<input>").attr({
+        type: "text",
+        name: "step[]",
+        placeholder: "Bước " + j++,
+      })
+    );
+    $("#step").append(newFieldset);
 
-    // Gửi yêu cầu POST tới '/add-dish' với dữ liệu ingredients
+    var inputElements1 = $('input[name="step[]"]');
+
+    var inputValue1 = inputElements1.eq(stepIndex).val();
+    inputElements1.eq(stepIndex + 1).val(inputValue1);
+    stepIndex++;
+
+    stepValues.push(inputValue1);
+  });
+
+  var finishLink = $('.actions a[href$="#finish"]');
+
+  finishLink.on("click", function (e) {
+    e.preventDefault();
+
+    var inputElements = $('input[name="ingredient[]"]');
+    var lastValue = inputElements.eq(ingredientIndex).val();
+    ingredientValues.push(lastValue);
+
+    var inputElements1 = $('input[name="step[]"]');
+    var lastValue1 = inputElements1.eq(stepIndex).val();
+    stepValues.push(lastValue1);
+    // console.log(ingredientValues);
+    // console.log(dishForm.name.value);
+
+    // Gửi yêu cầu POST tới '/add-dish' với dữ liệu ingredientValues
     $.ajax({
-      url: '/add-dish',
-      method: 'POST',
+      url: "/add-dish",
+      type: "post",
       data: {
-        ingredient: ingredients
+        name: dishForm.name.value,
+        image: dishForm.image.value,
+        ingredients:  JSON.stringify(ingredientValues),
+        steps: JSON.stringify(stepValues),
+        requirement: dishForm.requirement.value,
       },
-     
+      success: function (response) {
+        // Xử lý phản hồi thành công từ server
+        console.log("success");
+      },
+      error: function (xhr, status, error) {
+        // Xử lý lỗi khi gửi yêu cầu
+        console.log(error);
+      },
     });
   });
+
 });
 
-  $(document).ready(function() {
-    var i = 2;
-    $('#add-step').html('<i class="fa-solid fa-plus"></i> Thêm');
-    $('#add-step').click(function() {
-      var newFieldset = $('<fieldset>').append(
-        $('<input>').attr({
-          type: 'text',
-          name: 'step[]',
-          placeholder: 'Bước ' + i++
-        })
-      );
-      $('#step').append(newFieldset);
-    });
-  });
-  
-  

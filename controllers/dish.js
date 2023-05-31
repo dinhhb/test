@@ -11,11 +11,12 @@ exports.postAddDish = (req, res, next) => {
     const dishData = {
         name: req.body.name,
         image: req.body.image,
-        ingredients: req.body.ingredient || [],
-        steps: req.body.step || [],
+        ingredients: req.body.ingredients,
+        steps: req.body.steps,
         requirements: req.body.requirement
       };
       console.log(dishData);
+    //   console.log(req.body.ingredients);
     res.redirect('/');
 };
 

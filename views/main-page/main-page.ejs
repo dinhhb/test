@@ -114,21 +114,30 @@
 				</div>
 			</div>
 				
-			<div class="row">
-				<div class="col-lg-4 col-md-6 special-grid drinks" onclick="window.location.href = '/dish-detail'"">
+			<% if (dishes1.length > 0) { %>
+				<% for (let i = 0; i < dishes1.length; i++) { %>
+				  <% if (i % 3 === 0) { %>
+					<div class="row">
+				  <% } %>
+				  <div class="col-lg-4 col-md-6 special-grid drinks" onclick="window.location.href = '/dish-detail'">
 					<div class="gallery-single fix">
-						<button class="heart-btn"><i class="fa-solid fa-heart"></i></button>
-						<img src="/images/img-01.jpg" class="img-fluid" alt="Image">
-						<div class="why-text">
-							<h4>Phở bò</h4>
-							<p>Phở bò là món ăn yêu thích của người Hà Nội</p>
-							<h5> $7.79</h5>
-						</div>
+					  <button class="heart-btn"><i class="fa-solid fa-heart"></i></button>
+					  <img src="/images/img-01.jpg" class="img-fluid" alt="Image">
+					  <div class="why-text">
+						<h4><%= dishes1[i].name %></h4>
+						<!-- <p>Phở bò là món ăn yêu thích của người Hà Nội</p> -->
+						<h5>Admin</h5>
+					  </div>
 					</div>
-				</div>
-				
-				
-			</div>
+				  </div>
+				  <% if (i % 3 === 2 || i === dishes1.length - 1) { %>
+					</div>
+				  <% } %>
+				<% } %>
+			<% } else { %>
+				<h1>Không tìm thấy món ăn!</h1>
+			<% } %>	
+
 		</div>
 	</div>
 	<!-- End Menu -->

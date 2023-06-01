@@ -8,33 +8,29 @@ exports.getAddDish = (req, res, next) => {
 };
 
 exports.postAddDish = (req, res, next) => {
-    const dishData = {
-        name: req.body.name,
-        image: req.body.image,
-        ingredients: req.body.ingredients,
-        steps: req.body.steps,
-        requirements: req.body.requirement
-      };
-      console.log(dishData);
+    // const dishData = {
+    //     name: req.body.name,
+    //     image: req.body.image,
+    //     ingredients: req.body.ingredients,
+    //     steps: req.body.steps,
+    //     requirement: req.body.requirement
+    //   };
+    //   console.log(dishData);
     //   console.log(req.body.ingredients);
+    const dish = new Dish(req.body.name, req.body.image, req.body.ingredients, req.body.steps, req.body.requirement);
+    dish.save();
     res.redirect('/');
 };
 
 exports.getDishes = (req, res, next) => {
-    // Dish.fetchAll(dishes => {
-    //     res.render("shop", {
-    //         prods: products,
-    //         pageTitle: "Shop",
-    //         path: "/",
-    //         hasProducts: products.length > 0,
-    //         activeShop: true,
-    //         productCSS: true,
-    //       });
-    // });
-    res.render('main-page/main-page', {
-                // pageTitle: 'Shop',
-                path: '/'
-    })
+    Dish.fetchAll(dishes => {
+        res.render('main-page/main-page', {
+            // pageTitle: 'Shop',
+            dishes1: dishes,
+            hasDishes: dishes.length > 0,
+            path: '/'
+})
+    });
 };
 
 // exports.getMainPage = (req, res, next) => {

@@ -111,6 +111,7 @@ $(document).ready(function () {
       success: function (response) {
         // Xử lý phản hồi thành công từ server
         console.log("success");
+        window.location.href = "/";
       },
       error: function (xhr, status, error) {
         // Xử lý lỗi khi gửi yêu cầu

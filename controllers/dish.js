@@ -29,7 +29,7 @@ exports.getDishes = (req, res, next) => {
             dishes1: dishes,
             hasDishes: dishes.length > 0,
             path: '/'
-})
+        })
     });
 };
 

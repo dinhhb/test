@@ -25,28 +25,43 @@
                                             <div class="table-responsive">
                                                 <table class="table table-hover">
                                                     <tbody>
-                                                        <tr class="unread">
-                                                            <td><img class="rounded-circle" style="width:40px;" src="/images/admin/user/avatar-1.jpg" alt="activity-user"></td>
-                                                            <td>
-                                                                <h6 class="mb-1" onclick="redirectToBlogDetails()">Nộm rau muống</h6>
-                                                                <!-- <p class="m-0">Lorem Ipsum is simply…</p> -->
-                                                            </td>
-                                                            <!-- <td>
-                                                                <h6 class="text-muted"><i class="fas fa-circle text-c-green f-10 m-r-15"></i>11 MAY 12:56</h6>
-                                                            </td> -->
-                                                            <td><a href="#!" class="label theme-bg2 text-white f-12">Xóa</a><a href="../add-form/index.html" class="label theme-bg text-white f-12">Sửa</a></td>
-                                                        </tr>
-                                                        <tr class="unread">
+                                                        <% if (dishes1.length > 0) { %>
+                                                            <% let count = 1; %>
+                                                            <% for (let dish of dishes1) { %>
+                                                                <tr class="unread">
+                                                                    <td class="mb-1"><%= count %></td>
+                                                                    <!-- <td><img class="rounded-circle" style="width:40px;" src="/images/admin/user/avatar-1.jpg" alt="activity-user"></td> -->
+                                                                    <td>
+                                                                        <h6 class="mb-1"><%= dish.name %></h6>
+                                                                        <!-- <p class="m-0">Lorem Ipsum is simply…</p> -->
+                                                                    </td>
+                                                                    <td>admin</td>
+                                                                    <!-- <td>
+                                                                        <h6 class="text-muted"><i class="fas fa-circle text-c-green f-10 m-r-15"></i>11 MAY 12:56</h6>
+                                                                    </td> -->
+                                                                    <td class="text-right">
+                                                                        <a href="" class="label theme-bg text-white f-12">Xem</a>
+                                                                        <a href="/admin/edit-dish" class="label theme-bg2 text-white f-12">Sửa</a>
+                                                                        <form action="" method="post" style="display: inline;">
+                                                                            <button type="submit" class="label bg-danger text-white f-12">Xoá</button>
+                                                                        </form>                                                                    
+                                                                    </td>                                                                
+                                                                </tr>
+                                                                <% count++; %>
+                                                            <% } %>
+                                                        <% } %>
+                                                        
+                                                        <!-- <tr class="unread">
                                                             <td><img class="rounded-circle" style="width:40px;" src="/images/admin/user/avatar-2.jpg" alt="activity-user"></td>
                                                             <td>
-                                                                <h6 class="mb-1">Mathilde Andersen</h6>
+                                                                <h6 class="mb-1">Mathilde Andersen</h6> -->
                                                                 <!-- <p class="m-0">Lorem Ipsum is simply text of…</p> -->
                                                             </td>
                                                             <!-- <td>
                                                                 <h6 class="text-muted"><i class="fas fa-circle text-c-red f-10 m-r-15"></i>11 MAY 10:35</h6>
                                                             </td> -->
-                                                            <td><a href="#!" class="label theme-bg2 text-white f-12">Xóa</a><a href="../add-form/index.html" class="label theme-bg text-white f-12">Sửa</a></td>
-                                                        </tr>
+                                                            <!-- <td><a href="#!" class="label theme-bg2 text-white f-12">Xóa</a><a href="../add-form/index.html" class="label theme-bg text-white f-12">Sửa</a></td>
+                                                        </tr> -->
                                                         
                                                     </tbody>
                                                 </table>

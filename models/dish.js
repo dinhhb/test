@@ -28,6 +28,7 @@ module.exports = class Dish {
   }
 
   save() {
+    this.id = Math.random().toString();
     getDishesFromFile(dishes => {
         dishes.push(this);
         fs.writeFile(p, JSON.stringify(dishes), err => {
@@ -38,5 +39,12 @@ module.exports = class Dish {
 
   static fetchAll(cb) {
     getDishesFromFile(cb);
+  }
+
+  static findById(id, cb){
+    getDishesFromFile(dishes => {
+      const dish = dishes.find(p => p.id === id);
+      cb(dish);
+    });
   }
 };

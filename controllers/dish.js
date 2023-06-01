@@ -8,15 +8,6 @@ exports.getAddDish = (req, res, next) => {
 };
 
 exports.postAddDish = (req, res, next) => {
-    // const dishData = {
-    //     name: req.body.name,
-    //     image: req.body.image,
-    //     ingredients: req.body.ingredients,
-    //     steps: req.body.steps,
-    //     requirement: req.body.requirement
-    //   };
-    //   console.log(dishData);
-    //   console.log(req.body.ingredients);
     const dish = new Dish(req.body.name, req.body.image, req.body.ingredients, req.body.steps, req.body.requirement);
     dish.save();
     res.redirect('/');
@@ -33,16 +24,20 @@ exports.getDishes = (req, res, next) => {
     });
 };
 
-// exports.getMainPage = (req, res, next) => {
-//     res.render('main-page/main-page', {
-//         // pageTitle: 'Shop',
-//         path: '/'
-//     })  
-// };
+exports.getDish = (req, res, next) => {
+    const dishId1 = req.params.dishId;
+    Dish.findById(dishId1, dish => {
+        res.render('main-page/dish-detail', {
+            // pageTitle: 'Shop',
+            dish1: dish,
+            path: '/dish-detail'
+        })      
+    });
+};
 
-exports.getDishDetail = (req, res, next) => {
-    res.render('main-page/dish-detail', {
-        // pageTitle: 'Shop',
-        path: '/dish-detail'
-    })  
-}
+// exports.getDishDetail = (req, res, next) => {
+//     res.render('main-page/dish-detail', {
+//         // pageTitle: 'Shop',
+//         path: '/dish-detail'
+//     })  
+// }

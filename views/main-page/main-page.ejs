@@ -119,10 +119,11 @@
 				  <% if (i % 3 === 0) { %>
 					<div class="row">
 				  <% } %>
-				  <div class="col-lg-4 col-md-6 special-grid drinks" onclick="window.location.href = '/dish-detail'">
+				  <div class="col-lg-4 col-md-6 special-grid drinks" onclick="window.location.href = '/dishes/<%= dishes1[i].id %>'">
 					<div class="gallery-single fix">
 					  <button class="heart-btn"><i class="fa-solid fa-heart"></i></button>
 					  <img src="/images/img-01.jpg" class="img-fluid" alt="Image">
+					  <!-- <img src="<%= dishes1[i].image %>" class="img-fluid" alt="Image"> -->
 					  <div class="why-text">
 						<h4><%= dishes1[i].name %></h4>
 						<!-- <p>Phở bò là món ăn yêu thích của người Hà Nội</p> -->

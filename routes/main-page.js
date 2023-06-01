@@ -8,6 +8,8 @@ const router = express.Router();
 
 router.get('/', dishController.getDishes);
 
-router.get('/dish-detail', dishController.getDishDetail);
+router.get('/dishes/:dishId', dishController.getDish);
+
+// router.get('/dish-detail', dishController.getDishDetail);
 
 module.exports = router;

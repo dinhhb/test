@@ -1,9 +1,10 @@
 const Dish = require('../models/dish');
 
 exports.getAddDish = (req, res, next) => {
-    res.render('user/add-dish', {
-        // pageTitle: 'Shop',
-        path: '/add-dish'
+    res.render('user/edit-dish', {
+        pageTitle: 'Thêm món ăn',
+        path: '/add-dish',
+        editing: false
     })  
 };
 
@@ -13,10 +14,30 @@ exports.postAddDish = (req, res, next) => {
     res.redirect('/');
 };
 
+exports.getEditDish = (req, res, next) => {
+    const editMode = req.query.edit;
+    if (!editMode){
+        return res.redirect('/');
+    }
+
+    const dishId1 = req.params.dishId;
+    Dish.findById(dishId1, dish => {
+        if (!dish){
+            return res.redirect('/');
+        }
+        res.render('user/edit-dish', {
+            pageTitle: 'Sửa món ăn',
+            path: '/edit-dish',
+            editing: editMode,
+            dish1: dish
+        });  
+    });
+};
+
 exports.getDishes = (req, res, next) => {
     Dish.fetchAll(dishes => {
         res.render('main-page/main-page', {
-            // pageTitle: 'Shop',
+            pageTitle: 'Ẩm thực việt',
             dishes1: dishes,
             hasDishes: dishes.length > 0,
             path: '/'

@@ -121,7 +121,12 @@
 				  <% } %>
 				  <div class="col-lg-4 col-md-6 special-grid drinks" onclick="window.location.href = '/dishes/<%= dishes1[i].id %>'">
 					<div class="gallery-single fix">
-					  <button class="heart-btn"><i class="fa-solid fa-heart"></i></button>
+					  
+						<form action="/liked-dish" method="post">
+							<button class="heart-btn" type="submit"><i class="fa-solid fa-heart"></i></button>
+							<input type="hidden" name="dishId" value="<%= dishes1[i].id  %>">
+						</form>
+
 					  <img src="/images/img-01.jpg" class="img-fluid" alt="Image">
 					  <!-- <img src="<%= dishes1[i].image %>" class="img-fluid" alt="Image"> -->
 					  <div class="why-text">

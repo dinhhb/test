@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<script src="https://kit.fontawesome.com/b0b8434f7e.js" crossorigin="anonymous"></script>
 
-	<title>form-v1 by Colorlib</title>
+	<title><%= pageTitle  %></title>
 	<!-- Mobile Specific Metas -->
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	<!-- Font-->
@@ -50,7 +50,7 @@
 	<div class="page-content">
 		<div class="form-v1-content">
 			<div class="wizard-form">
-		        <form id ="form-register" class="form-register" action="#" method="post">
+		        <form id ="form-register" class="form-register" action="<% if (editing) { %>edit-dish<% } else { %>add-dish<% } %>" method="post">
 		        	<div id="form-total">
 		        		<!-- SECTION 1 -->
 			            <h2>

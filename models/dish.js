@@ -29,6 +29,7 @@ module.exports = class Dish {
   }
 
   save() {
+    console.log(this.id);
     getDishesFromFile(dishes => {
       // edit mon an
       if (this.id){
@@ -37,7 +38,7 @@ module.exports = class Dish {
         updatedDishes[existingDishIndex] = this;
         fs.writeFile(p, JSON.stringify(updatedDishes), err => {
           console.log(err);
-        })
+        });
       
       // add mon an
       } else {

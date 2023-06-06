@@ -27,7 +27,7 @@
 								<!-- <li>|</li> -->
 								<!-- <li><i class="zmdi zmdi-time"></i>Time : <span>11.30 am</span></li> -->
 							</ul></div>
-							<% for (let step of dish1.steps) { %>
+							<% for (let step of stepsArray) { %>
 								<p><%= step %></p>
 							<% } %>
 								<!-- <blockquote>
@@ -146,7 +146,7 @@
 								<li><a href="#"><span>Đường 10g</span></a></li>
 								<li><a href="#"><span>Rau mùi</span></a></li>
 								<li><a href="#"><span>Chanh to 2 quả</span></a></li> -->
-								<% for (let ingredient of dish1.ingredients) { %>
+								<% for (let ingredient of ingredientsArray) { %>
 									<li><a href="#"><span><%= ingredient  %></span></a></li>
 								<% } %>
 							</ul>

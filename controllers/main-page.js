@@ -17,7 +17,9 @@ exports.getDish = (req, res, next) => {
         res.render('main-page/dish-detail', {
             // pageTitle: 'Shop',
             dish1: dish,
-            path: '/dish-detail'
+            path: '/dish-detail',
+            ingredientsArray: JSON.parse(dish.ingredients),
+            stepsArray: JSON.parse(dish.steps)
         })      
     });
 };

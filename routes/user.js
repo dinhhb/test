@@ -4,8 +4,6 @@ const express = require('express');
 
 const userController = require('../controllers/user');
 
-const dishController = require('../controllers/dish');
-
 const router = express.Router();
 
 // định nghĩa route xử lý
@@ -19,10 +17,12 @@ router.get('/shared-dish', userController.getSharedDish);
 
 router.get('/profile', userController.getProfile);
 
-router.get('/add-dish', dishController.getAddDish);
+router.get('/add-dish', userController.getAddDish);
 
-router.post('/add-dish', dishController.postAddDish);
+router.post('/add-dish', userController.postAddDish);
 
-router.get('/edit-dish/:dishId', dishController.getEditDish);
+router.get('/edit-dish/:dishId', userController.getEditDish);
+
+router.post('/edit-dish', userController.postEditDish);
 
 module.exports = router;

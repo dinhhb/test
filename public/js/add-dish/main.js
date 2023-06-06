@@ -34,28 +34,73 @@ $(document).ready(function () {
   var ingredientIndex = 0;
   var ingredientValues = [];
   var dishForm = document.getElementById("form-register");
-
+  var dish1Ingredient = $('#editing-value1').val().split(",");
+  console.log(dish1Ingredient);
+  // console.log(dish1Ingredient[1]);
   $("#add-ingredient").html('<i class="fa-solid fa-plus"></i> Thêm');
-  $("#add-ingredient").click(function () {
-    var newFieldset = $("<fieldset>").append(
-      $("<input>").attr({
-        type: "text",
-        name: "ingredient[]",
-        placeholder: "Điền nguyên liệu thứ " + i++ + " của bạn",
-      })
-    );
+
+  if (dish1Ingredient){
+   dish1Ingredient.forEach((ingredient, index) => {
+      var newFieldset = $("<fieldset>").append(
+        $("<input>").attr({
+          type: "text",
+          name: "ingredient[]",
+          placeholder: "Điền nguyên liệu thứ " + (index + 1) + " của bạn",
+          value: ingredient
+        })
+      );
+      $("#ingredients").append(newFieldset);
+      ingredientValues.push(ingredient);
+    ingredientIndex = index + 1;
+      console.log(ingredientIndex);
+    });
+
+    console.log(ingredientValues);
+    $("#add-ingredient").click(function () {
+      var newFieldset = $("<fieldset>").append(
+        $("<input>").attr({
+          type: "text",
+          name: "ingredient[]",
+          placeholder: "Điền nguyên liệu thứ " + (ingredientIndex + 1) + " của bạn",
+        })
+      );
     $("#ingredients").append(newFieldset);
 
     // Lưu giá trị của trường fieldset vào phần tử tiếp theo trong mảng ingredient[]
     var inputElements = $('input[name="ingredient[]"]');
 
     var inputValue = inputElements.eq(ingredientIndex).val();
+    console.log(ingredientIndex);
     inputElements.eq(ingredientIndex + 1).val(inputValue);
     ingredientIndex++;
 
     ingredientValues.push(inputValue);
+    console.log(ingredientValues);
   });
 
+
+  } else {
+    $("#add-ingredient").click(function () {
+        var newFieldset = $("<fieldset>").append(
+          $("<input>").attr({
+            type: "text",
+            name: "ingredient[]",
+            placeholder: "Điền nguyên liệu thứ " + i++ + " của bạn",
+          })
+        );
+      $("#ingredients").append(newFieldset);
+  
+  
+      // Lưu giá trị của trường fieldset vào phần tử tiếp theo trong mảng ingredient[]
+      var inputElements = $('input[name="ingredient[]"]');
+  
+      var inputValue = inputElements.eq(ingredientIndex).val();
+      inputElements.eq(ingredientIndex + 1).val(inputValue);
+      ingredientIndex++;
+  
+      ingredientValues.push(inputValue);
+    });
+  }
   // console.log(ingredientValues);
 
   var j = 2;
@@ -87,6 +132,10 @@ $(document).ready(function () {
   finishLink.on("click", function (e) {
     e.preventDefault();
 
+    var editing = $('#editing-value').val() === 'true';
+
+    var action = editing ? '/edit-dish' : '/add-dish';
+
     var inputElements = $('input[name="ingredient[]"]');
     var lastValue = inputElements.eq(ingredientIndex).val();
     ingredientValues.push(lastValue);
@@ -111,7 +160,8 @@ $(document).ready(function () {
       success: function (response) {
         // Xử lý phản hồi thành công từ server
         console.log("success");
-        window.location.href = "/";
+        console.log(ingredientValues);
+        // window.location.href = action;
       },
       error: function (xhr, status, error) {
         // Xử lý lỗi khi gửi yêu cầu

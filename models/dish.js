@@ -19,7 +19,8 @@ const getDishesFromFile = cb => {
 };
 
 module.exports = class Dish {
-  constructor(name, image, ingredients, steps, requirement) {
+  constructor(id, name, image, ingredients, steps, requirement) {
+    this.id = id;
     this.name = name;
     this.image = image;
     this.ingredients = ingredients;
@@ -28,12 +29,24 @@ module.exports = class Dish {
   }
 
   save() {
-    this.id = Math.random().toString();
     getDishesFromFile(dishes => {
-        dishes.push(this);
-        fs.writeFile(p, JSON.stringify(dishes), err => {
-            console.log(err);
+      // edit mon an
+      if (this.id){
+        const existingDishIndex = dishes.findIndex(dish => dish.id === this.id);
+        const updatedDishes = [...dishes];
+        updatedDishes[existingDishIndex] = this;
+        fs.writeFile(p, JSON.stringify(updatedDishes), err => {
+          console.log(err);
         })
+      
+      // add mon an
+      } else {
+          this.id = Math.random().toString();
+          dishes.push(this);
+          fs.writeFile(p, JSON.stringify(dishes), err => {
+            console.log(err);
+          })
+      }
     });
   }
 
